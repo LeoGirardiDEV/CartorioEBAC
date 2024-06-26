@@ -143,6 +143,7 @@ int main() //Função principal do programa "MENU"
 		printf("\t\t1 - Consultar Nomes\n");
 		printf("\t\t2 - Registrar Nomes\n");
 		printf("\t\t3 - Excluir Nomes\n\n");
+		printf("\t\t4 - Sair do Sistema\n\n");		
 		printf("==================================================\n\n");
 		printf("Opção:"); //Fim do MENU
 			
@@ -163,6 +164,11 @@ int main() //Função principal do programa "MENU"
 			case 3:				
 			excluir(); 
 			break;	
+			
+			case 4:
+			printf("\nObrigado por utilizar o sistema!\n\n");
+			return 0;
+			break;
 			
 			default:
 			printf("Essa opção não está disponível\n");
