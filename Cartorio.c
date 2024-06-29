@@ -115,65 +115,90 @@ int excluir()
 	if(file == NULL) //Se a informação inserida não for encontrada no banco de dados "NULL", mostrar a mensagem abaixo ao usuário
 	{
 		printf("\nO usuário não se encontra no sistema, tente outro.\n\n");
+		printf("==================================================\n\n");
 		system("pause"); //Pausa o programa	
 	}
 	else //Ou, se a informação for encontrada, deletar o arquivo especificado pelo usuário e mostrar a mensagem abaixo
 	{
 		remove(cpf); //Remove a informação da variável indicada pelo usuário
 		printf("\nUsuário deletado com sucesso!\n\n");
+		printf("==================================================\n\n");
 		system("pause"); //Pausa o programa	
 	}
 }
 
-int main() //Função principal do programa "MENU"
+int main() //Função principal e primeira a ser exibida do programa "MENU"
 {
+	setlocale(LC_ALL, "Portuguese"); //Definindo região para uso dos caracteres
+	
 	//Definindo variáveis e seus valores
 	int opcao=0;
 	int laco=1;
+	int compara=2;
+	char senhadigitada[10]="a";
 	
-	for(laco=1;laco=1;) //Operador de repetição para sempre voltar a este menu, a este "laço"
+	while(1) //Loop criado para voltar a validação de senha
 	{
-		
-		system("cls"); //Responsável por limpar a tela
-		
-		setlocale(LC_ALL, "Portuguese"); //Definindo região para uso dos caracteres
+		printf("================ CARTÓRIO DA EBAC ================\n\n");		
+		printf("\t\tLogin: ADMINISTRADOR\n");
+		printf("\t\tSenha: ");
+		scanf("%s",senhadigitada); //Armazena o valor na string "senhadigitada"
+		system("cls");
 	
-		printf("================ CARTÓRIO DA EBAC ================\n\n"); //Início do MENU
-		printf("\t  Escolha a opção desejada abaixo:\n\n");
-		printf("\t\t1 - Consultar Nomes\n");
-		printf("\t\t2 - Registrar Nomes\n");
-		printf("\t\t3 - Excluir Nomes\n\n");
-		printf("\t\t4 - Sair do Sistema\n\n");		
-		printf("==================================================\n\n");
-		printf("Opção:"); //Fim do MENU
-			
-		scanf("%d", &opcao); //Armazenando a escolha do usuário / "%d" atribuição para armazenar variável do tipo inteiro / &define em qual variável ele irá armazenar a escolha
-	
-		system("cls"); //Responsável por limpar a tela
-			
-		switch(opcao) //Início da seleção do menu
+		compara = strcmp(senhadigitada, "admin"); //Compara a variável "senhadigitada" com a informação dada pelo usuário
+		
+		if (compara == 0) //Quebra de loop se a senha for a indicada
 		{
-			case 1:
-			consulta(); //Chamada de funções
-			break;	
+			for(laco=1;laco=1;) //Operador de repetição para sempre voltar a este menu, a este "laço"
+			{
+				system("cls");
+				setlocale(LC_ALL, "Portuguese"); //Definindo região para uso dos caracteres
+	
+				printf("================ CARTÓRIO DA EBAC ================\n\n"); //Início do MENU
+				printf("\t  Escolha a opção desejada abaixo:\n\n");
+				printf("\t\t1 - Consultar Nomes\n");
+				printf("\t\t2 - Registrar Nomes\n");
+				printf("\t\t3 - Excluir Nomes\n\n");
+				printf("\t\t4 - Sair do Sistema\n\n");		
+				printf("==================================================\n\n");
+				printf("Opção:"); //Fim do MENU
 			
-			case 2:
-			registro();
-			break;
+				scanf("%d", &opcao); //Armazenando a escolha do usuário / "%d" atribuição para armazenar variável do tipo inteiro / &define em qual variável ele irá armazenar a escolha
+	
+				system("cls"); //Responsável por limpar a tela
 			
-			case 3:				
-			excluir(); 
-			break;	
+				switch(opcao) //Início da seleção do menu
+				{
+					case 1:
+					consulta(); //Chamada de funções
+					break;	
 			
-			case 4:
-			printf("\nObrigado por utilizar o sistema!\n\n");
-			return 0;
-			break;
+					case 2:
+					registro();
+					break;
 			
-			default:
-			printf("Essa opção não está disponível\n");
+					case 3:				
+					excluir(); 
+					break;	
+			
+					case 4:
+					printf("\nObrigado por utilizar o sistema!\n\n");
+					return 0;
+					break;
+			
+					default:
+					printf("Essa opção não está disponível\n");
+					system("pause");
+					break;							
+				} //Fim da seleção		
+			}
+		}
+	
+		else //Em caso de erro da senha será exibida a mensagem abaixo, e retorna o loop de login
+		{
+			printf("\nSenha incorreta! Tente novamente\n\n");
 			system("pause");
-			break;							
-		} //Fim da seleção		
+			system("cls");
+		}	
 	}
 }
